@@ -88,4 +88,37 @@ class TodoController extends Controller
 
         return "Penyimpanan berhasil!";
     }
+
+    function ubahTugas($id) {
+        $dataTugas = DB::table('tb_todo')
+                    ->where('id', '=', $id)
+                    ->first();
+                    
+                    return view('pengguna.ubahTugas', [
+                        'a' => $dataTugas
+                    ]);
+    }
+
+    function simpanPembaruan(Request $request, $id) {
+        
+        DB::table('tb_todo') // query builder - laravel
+        ->where('id', '=', $id)
+        ->update([
+            'tugas' => $request->perbaruiTugas
+        ]);
+
+        $dataTodos = DB::table('tb_todo') // mengambil semua data dari tabel tb_todo
+        ->join('tb_pegawai', 'tb_todo.tugas_dari', '=', 'tb_pegawai.id')
+        ->select(
+            'tb_todo.id',
+            'tb_todo.tugas',
+            'tb_pegawai.nama as pemberi_tugas',
+            'tb_todo.keterangan'
+        )
+        ->get();
+
+        return view('pengguna.index', [
+            'dataTodos' => $dataTodos
+        ]);
+    }
 }

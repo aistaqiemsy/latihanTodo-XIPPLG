@@ -44,3 +44,9 @@ Route::get('/tugas/tambahTugas', [TodoController::class, 'tambahTugas']);
 // simpan ke database
 Route::post('/tugas/simpanTugasBaru', [TodoController::class, 'simpanTugas']);
 
+//ubah tugas
+Route::get('tugas/perbaruiTugas/{id}', [TodoController::class, 'ubahTugas']);
+
+//simpan ke database
+Route::post('/tugas/simpanPembaruanTugas/{id}', [TodoController::class, 'simpanPembaruan']);
+

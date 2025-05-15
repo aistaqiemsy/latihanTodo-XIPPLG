@@ -34,5 +34,6 @@
             <td>{{ $detailTodo->keterangan }}</td>
         </tr>
     </table>
+    <a href="/tugas/perbaruiTugas/{{ $detailTodo->id }}">Perbarui Penugasan</a>
 </body>
 </html>

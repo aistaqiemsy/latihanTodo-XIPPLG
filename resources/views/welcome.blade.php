@@ -8,7 +8,6 @@
 <body>
     <center>
         <a href="/pengguna/login">Log In Pengguna</a><br>
-        <a href="/lihatData">Lihat Data</a>
     </center>
     
 </body>
