@@ -9,14 +9,14 @@ class TodoController extends Controller
 {
     function tampilkanTodo() { // membuat method, harus sama dengan yang di Controller
         $dataTodo = DB::table('tb_todo') // mengambil semua data dari tabel tb_todo
-        ->join('tb_pegawai', 'tb_todo.tugas_dari', '=', 'tb_pegawai.id')
-        ->select(
-            'tb_todo.id',
-            'tb_todo.tugas',
-            'tb_pegawai.nama as pemberi_tugas',
-            'tb_todo.keterangan'
-        )
-        ->get();
+                    ->join('tb_pegawai', 'tb_todo.tugas_dari', '=', 'tb_pegawai.id')
+                    ->select(
+                        'tb_todo.id',
+                        'tb_todo.tugas',
+                        'tb_pegawai.nama as pemberi_tugas',
+                        'tb_todo.keterangan'
+                    )
+                    ->get();
 
         // tampilkan view index dalam folder pengguna, disertai data dari basis data
         return view('pengguna.index', ['dataTodos' => $dataTodo]); 
@@ -53,8 +53,15 @@ class TodoController extends Controller
         ->where('id', $id)
         ->delete();
 
-        $dataTodos = DB::table('tb_todo') // mengambil data untuk dikirim ke view index
-        ->get();
+        $dataTodos = DB::table('tb_todo') // mengambil semua data dari tabel tb_todo
+                    ->join('tb_pegawai', 'tb_todo.tugas_dari', '=', 'tb_pegawai.id')
+                    ->select(
+                        'tb_todo.id',
+                        'tb_todo.tugas',
+                        'tb_pegawai.nama as pemberi_tugas',
+                        'tb_todo.keterangan'
+                    )
+                    ->get();
 
         return view('pengguna.index', [ 
             'dataTodos' => $dataTodos
